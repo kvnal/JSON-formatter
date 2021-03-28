@@ -8,14 +8,11 @@ function format(){
         return alert("no input given")
     }
     try{
-        var json=JSON.stringify(inp);
-        console.log(json);
-        console.log(typeof json);
+        var json=JSON.stringify(eval(`(${inp})`),null,'\t');
     }
     catch(err){
-        //  alert("Wrong type")
-        console.log(err);
-        //  return window.location.reload()
+         alert("Wrong type")
+         return window.location.reload()
         
     }
 
@@ -23,19 +20,19 @@ function format(){
     copy();
     btn.innerHTML="copied!" 
     btn.classList.remove('bg-blue-500')
+    btn.classList.remove('hover:bg-blue-700')
     btn.classList.add('bg-green-400')
     setTimeout(`
     btn.classList.remove('bg-green-400')
     btn.classList.add('bg-blue-500')
+    btn.classList.add('hover:bg-blue-700')
     btn.innerHTML="Format" 
     `,2000)
     
 }
 
 function copy(){
-    var json= document.getElementById("output");
-    json.select();
-    // return 
-    document.execCommand("copy");
-    console.log("copied");
+    var oup= document.getElementById("output");
+    oup.select();
+    return document.execCommand("copy");
 }
